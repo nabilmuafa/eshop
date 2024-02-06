@@ -23,14 +23,18 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public void delete(String id){
-        Iterator<Product> data = productRepository.findAll();
-        for (Iterator<Product> it = data; it.hasNext(); ) {
-            Product p = it.next();
-            if (p.getProductId().equals(id)) {
-                productRepository.delete(p);
-                break;
-            }
-        }
+        Product product = productRepository.getProduct(id);
+        productRepository.delete(product);
+    }
+
+    @Override
+    public void edit(String id, String productName, int productQuantity){
+        productRepository.edit(id, productName, productQuantity);
+    }
+
+    @Override
+    public Product getProduct(String id){
+        return productRepository.getProduct(id);
     }
 
     @Override

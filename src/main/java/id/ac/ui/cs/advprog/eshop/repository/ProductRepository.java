@@ -20,6 +20,31 @@ public class ProductRepository {
         productData.remove(product);
     }
 
+    public Product edit(String id, String productName, int productQuantity){
+        Product p = null;
+        for (int i=0; i<productData.size(); i++){
+            p = productData.get(i);
+            if (p.getProductId().equals(id)){
+                p.setProductName(productName);
+                p.setProductQuantity(productQuantity);
+                productData.set(i, p);
+                break;
+            }
+        }
+        return p;
+    }
+
+    public Product getProduct(String id){
+        Iterator<Product> data = this.findAll();
+        while (data.hasNext()) {
+            Product p = data.next();
+            if (p.getProductId().equals(id)) {
+                return p;
+            }
+        }
+        return null;
+    }
+
     public Iterator<Product> findAll(){
         return productData.iterator();
     }
