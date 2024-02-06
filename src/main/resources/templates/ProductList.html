@@ -16,12 +16,19 @@
         <tr>
             <th scope="col">Product Name</th>
             <th scope="col">Quantity</th>
+            <th scope="col">Modify</th>
         </tr>
         </thead>
         <tbody>
         <tr th:each="product: ${products}">
             <td th:text="${product.productName}"></td>
             <td th:text="${product.productQuantity}"></td>
+            <td class="d-flex">
+                <a th:href="@{/product/create}" class="btn btn-primary btn-sm">Edit</a>
+                <form method="POST" th:action="@{/product/delete/{id}(id=${product.productId})}">
+                    <button class="btn btn-danger btn-sm" type="submit">Delete</button>
+                </form>
+            </td>
         </tr>
         </tbody>
     </table>
