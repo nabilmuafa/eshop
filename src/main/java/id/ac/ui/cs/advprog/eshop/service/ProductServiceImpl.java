@@ -22,6 +22,18 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
+    public void delete(String id){
+        Iterator<Product> data = productRepository.findAll();
+        for (Iterator<Product> it = data; it.hasNext(); ) {
+            Product p = it.next();
+            if (p.getProductId().equals(id)) {
+                productRepository.delete(p);
+                break;
+            }
+        }
+    }
+
+    @Override
     public List<Product> findAll(){
         Iterator<Product> productIterator = productRepository.findAll();
         List<Product> allProduct = new ArrayList<>();
