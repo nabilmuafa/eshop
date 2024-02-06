@@ -2,7 +2,6 @@ package id.ac.ui.cs.advprog.eshop.service;
 
 import id.ac.ui.cs.advprog.eshop.model.Product;
 import id.ac.ui.cs.advprog.eshop.repository.ProductRepository;
-import jakarta.websocket.OnError;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,9 +15,8 @@ public class ProductServiceImpl implements ProductService {
     private ProductRepository productRepository;
 
     @Override
-    public Product create(Product product){
+    public void create(Product product){
         productRepository.create(product);
-        return product;
     }
 
     @Override
@@ -28,7 +26,9 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public void edit(String id, String productName, int productQuantity){
+    public void edit(String id, Product product){
+        String productName = product.getProductName();
+        int productQuantity = product.getProductQuantity();
         productRepository.edit(id, productName, productQuantity);
     }
 
