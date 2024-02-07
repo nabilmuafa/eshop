@@ -62,4 +62,52 @@ public class ProductRepositoryTest {
         assertEquals(product2.getProductId(), savedProduct.getProductId());
         assertFalse(productIterator.hasNext());
     }
+
+    @Test
+    void testCreateAndDelete() {
+        Product product = new Product();
+        product.setProductId("eb558e9f-1c39-460e-8860-71af6af63bd6");
+        product.setProductName("Sampo Cap Bambang");
+        product.setProductQuantity(100);
+        productRepository.create(product);
+
+        productRepository.delete(product);
+        Iterator<Product> productIterator = productRepository.findAll();
+        assertFalse(productIterator.hasNext());
+    }
+    @Test
+    void testCreateThenDeleteTwiceSameItem() {
+        Product product = new Product();
+        product.setProductId("eb558e9f-1c39-460e-8860-71af6af63bd6");
+        product.setProductName("Sampo Cap Bambang");
+        product.setProductQuantity(100);
+        productRepository.create(product);
+
+        productRepository.delete(product);
+        assertFalse(productRepository.delete(product));
+    }
+
+    @Test
+    void testCreateThenEdit() {
+        Product product = new Product();
+        product.setProductId("eb558e9f-1c39-460e-8860-71af6af63bd6");
+        product.setProductName("Sampo Cap Bambang");
+        product.setProductQuantity(100);
+        productRepository.create(product);
+
+        String productId = product.getProductId();
+        productRepository.edit(productId, "Sampo Cap Ucup", 150);
+        product = productRepository.getProduct(productId);
+        assertEquals("Sampo Cap Ucup", product.getProductName());
+        assertEquals(150, product.getProductQuantity());
+    }
+
+    @Test
+    void testEditNonExistentProduct() {
+        String fakeProductId = "eb558e9f-1c39-460e-8860-71af6af63bd6";
+        Product editStatus = productRepository.edit(fakeProductId, "Sampo Cap Asep", 50);
+        Product product = productRepository.getProduct(fakeProductId);
+        assertNull(editStatus);
+        assertNull(product);
+    }
 }
