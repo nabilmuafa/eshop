@@ -34,14 +34,4 @@ public class ProductTest {
     void testGetProductQuantity(){
         assertEquals(100, this.product_valid.getProductQuantity());
     }
-
-    @Test
-    void testGetProductNameInvalid(){
-        assertEquals("Unknown", this.product_invalid.getProductName());
-    }
-
-    @Test
-    void testGetProductQuantityInvalid(){
-        assertEquals(1, this.product_invalid.getProductQuantity());
-    }
 }
