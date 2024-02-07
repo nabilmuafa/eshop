@@ -16,8 +16,8 @@ public class ProductRepository {
         return product;
     }
 
-    public void delete(Product product){
-        productData.remove(product);
+    public boolean delete(Product product){
+        return productData.remove(product);
     }
 
     public Product edit(String id, String productName, int productQuantity){
