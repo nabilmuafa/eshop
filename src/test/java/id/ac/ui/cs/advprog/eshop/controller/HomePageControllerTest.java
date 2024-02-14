@@ -14,7 +14,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @ExtendWith(MockitoExtension.class)
 @WebMvcTest(controllers = HomePageController.class)
 @AutoConfigureMockMvc(addFilters = false)
-public class HomePageControllerTest {
+class HomePageControllerTest {
     @Autowired
     private MockMvc mockMvc;
 
