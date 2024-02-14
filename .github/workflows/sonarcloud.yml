@@ -7,7 +7,7 @@ on:
 
 jobs:
   build:
-    name: Build
+    name: SonarCloud Analysis
     runs-on: ubuntu-22.04
     steps:
       - name: Check out the Git repository
@@ -36,7 +36,7 @@ jobs:
       - name: Set gradlew as executable
         run: chmod +x ./gradlew
       - name: Build and analyze
-        run: ./gradlew build jacocoTestReport sonarqube --info
+        run: ./gradlew build jacocoTestReport sonar --info
         env:
           # Needed to get some information about the pull request, if any
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
