@@ -4,7 +4,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
-public class ProductTest {
+class ProductTest {
     Product product_valid;
     Product product_invalid;
     @BeforeEach
