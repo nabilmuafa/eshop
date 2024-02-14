@@ -13,7 +13,7 @@ import java.util.Iterator;
 import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(MockitoExtension.class)
-public class ProductRepositoryTest {
+class ProductRepositoryTest {
 
     @InjectMocks
     ProductRepository productRepository;
@@ -75,6 +75,19 @@ public class ProductRepositoryTest {
         Iterator<Product> productIterator = productRepository.findAll();
         assertFalse(productIterator.hasNext());
     }
+
+    @Test
+    void testCreateDeleteThenGet() {
+        Product product = new Product();
+        product.setProductId("eb558e9f-1c39-460e-8860-71af6af63bd6");
+        product.setProductName("Sampo Cap Bambang");
+        product.setProductQuantity(100);
+        productRepository.create(product);
+
+        productRepository.delete(product);
+        assertNull(productRepository.getProduct("eb558e9f-1c39-460e-8860-71af6af63bd6"));
+    }
+
     @Test
     void testCreateThenDeleteTwiceSameItem() {
         Product product = new Product();
@@ -103,11 +116,24 @@ public class ProductRepositoryTest {
     }
 
     @Test
-    void testEditNonExistentProduct() {
+    void testEditWhenEmpty() {
         String fakeProductId = "eb558e9f-1c39-460e-8860-71af6af63bd6";
         Product editStatus = productRepository.edit(fakeProductId, "Sampo Cap Asep", 50);
         Product product = productRepository.getProduct(fakeProductId);
         assertNull(editStatus);
         assertNull(product);
+    }
+
+    @Test
+    void testCreateThenEditNonExistentItem() {
+        Product product = new Product();
+        product.setProductId("eb558e9f-1c39-460e-8860-71af6af63bd6");
+        product.setProductName("Sampo Cap Bambang");
+        product.setProductQuantity(100);
+        productRepository.create(product);
+
+        String productId = product.getProductId();
+        Product res = productRepository.edit("bbd91076-f842-4d76-a430-f42adb27889f", "Sampo Cap Ucup", 150);
+        assertNull(res);
     }
 }

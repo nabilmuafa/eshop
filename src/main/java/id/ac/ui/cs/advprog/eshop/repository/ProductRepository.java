@@ -21,15 +21,10 @@ public class ProductRepository {
     }
 
     public Product edit(String id, String productName, int productQuantity){
-        Product p = null;
-        for (int i=0; i<productData.size(); i++){
-            p = productData.get(i);
-            if (p.getProductId().equals(id)){
-                p.setProductName(productName);
-                p.setProductQuantity(productQuantity);
-                productData.set(i, p);
-                break;
-            }
+        Product p = getProduct(id);
+        if (p != null) {
+            p.setProductName(productName);
+            p.setProductQuantity(productQuantity);
         }
         return p;
     }
