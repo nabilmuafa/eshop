@@ -20,7 +20,7 @@ class HomePageControllerTest {
 
     @Test
     void testReturnHomeController() throws Exception{
-        mockMvc.perform(get("/")).andExpect(view().name("HomePage"));
+        mockMvc.perform(get("/")).andExpect(view().name("homePage"));
     }
 
 }
