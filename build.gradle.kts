@@ -81,3 +81,11 @@ tasks.jacocoTestReport {
 		xml.required = true
 	}
 }
+
+sonar {
+	properties {
+		property("sonar.host.url", "https://sonarcloud.io")
+		property("sonar.organization", "nabilmuafa")
+		property("sonar.projectKey", "nabilmuafa_eshop")
+	}
+}
