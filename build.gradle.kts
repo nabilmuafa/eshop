@@ -4,13 +4,13 @@ plugins {
 	id("org.sonarqube") version "4.4.1.3373"
 	id("org.springframework.boot") version "3.2.2"
 	id("io.spring.dependency-management") version "1.1.4"
+    kotlin("jvm")
 }
 
 group = "id.ac.ui.cs.advprog"
 version = "0.0.1-SNAPSHOT"
 
 java {
-	sourceCompatibility = JavaVersion.VERSION_21
 }
 
 configurations {
@@ -41,6 +41,7 @@ dependencies {
 	testImplementation("io.github.bonigarcia:webdrivermanager:${webdriverManagerVersion}")
 	testImplementation("org.junit.jupiter:junit-jupiter-api:${junitJupiterVersion}")
 	testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:${junitJupiterVersion}")
+    implementation(kotlin("stdlib-jdk8"))
 }
 
 tasks.register<Test>("unitTest") {
@@ -88,4 +89,7 @@ sonar {
 		property("sonar.organization", "nabilmuafa")
 		property("sonar.projectKey", "nabilmuafa_eshop")
 	}
+}
+kotlin {
+    jvmToolchain(21)
 }
