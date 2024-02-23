@@ -1,6 +1,7 @@
 package id.ac.ui.cs.advprog.eshop.repository;
 
 import id.ac.ui.cs.advprog.eshop.model.Product;
+import id.ac.ui.cs.advprog.eshop.utils.UUIDGenerator;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
@@ -9,9 +10,13 @@ import java.util.List;
 
 @Repository
 public class ProductRepository {
-    private List<Product> productData = new ArrayList<>();
+    private final List<Product> productData = new ArrayList<>();
+    private final UUIDGenerator uuidGenerator = new UUIDGenerator();
 
     public Product create(Product product){
+        if(product.getProductId() == null){
+            product.setProductId(uuidGenerator.generateId());
+        }
         productData.add(product);
         return product;
     }
