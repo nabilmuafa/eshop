@@ -1,5 +1,6 @@
 package id.ac.ui.cs.advprog.eshop.repository;
 import id.ac.ui.cs.advprog.eshop.model.Car;
+import id.ac.ui.cs.advprog.eshop.utils.UUIDGenerator;
 import org.springframework.stereotype.Repository;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -9,11 +10,11 @@ import java.util.UUID;
 @Repository
 public class CarRepository {
     static int id = 0;
-    private List<Car> carData = new ArrayList<>();
+    private final List<Car> carData = new ArrayList<>();
+    private final UUIDGenerator uuidGenerator = new UUIDGenerator();
     public Car create(Car car){
         if(car.getCarId() == null){
-            UUID uuid = UUID.randomUUID();
-            car.setCarId(uuid.toString());
+            car.setCarId(uuidGenerator.generateId());
         }
         carData.add(car);
         return car;
@@ -34,9 +35,7 @@ public class CarRepository {
         for (int i=0; i < carData.size(); i++){
             Car car = carData.get(i);
             if (car.getCarId().equals(id)){
-                car.setCarName(updatedCar.getCarName());
-                car.setCarColor(updatedCar.getCarColor());
-                car.setCarQuantity(updatedCar.getCarQuantity());
+                car.update(updatedCar);
                 return car;
             }
         }
