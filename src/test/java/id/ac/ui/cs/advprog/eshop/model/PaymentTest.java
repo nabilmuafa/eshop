@@ -88,4 +88,19 @@ public class PaymentTest {
         payment.setStatus("REJECTED");
         assertEquals("REJECTED", payment.getStatus());
     }
+
+    @Test
+    void testCreateAllValidArguments() {
+        paymentData.put("voucherCode", "ESHOP80235gh021f");
+        Payment payment = new Payment(
+                "b94d0613-a74b-427e-8967-dc40abda13e7",
+                "by-voucher",
+                "SUCCESS",
+                paymentData
+        );
+        assertEquals("b94d0613-a74b-427e-8967-dc40abda13e7", payment.getId());
+        assertEquals("by-voucher", payment.getMethod());
+        assertEquals("SUCCESS", payment.getStatus());
+        assertEquals(paymentData, payment.getPaymentData());
+    }
 }
