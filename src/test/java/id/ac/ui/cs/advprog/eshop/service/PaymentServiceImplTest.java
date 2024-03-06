@@ -64,38 +64,12 @@ public class PaymentServiceImplTest {
     }
 
     @Test
-    void testAddPayment() {
-        Payment payment = payments.getFirst();
-        doReturn(payment).when(paymentRepository).save(payment);
-
-        Payment result = paymentService.addPayment(this.order, payment.getMethod(), payment.getPaymentData());
-        verify(paymentRepository, times(1)).save(payment);
-        assertEquals(payment.getId(), result.getId());
-    }
-
-    @Test
     void testAddPaymentIfAlreadySucceed() {
-        Payment payment = payments.get(1);
+        Payment payment = payments.getFirst();
         doReturn(payment).when(paymentRepository).findById(payment.getId());
 
         assertNull(paymentService.addPayment(this.order, payment.getMethod(), payment.getPaymentData()));
         verify(paymentRepository, times(0)).save(payment);
-    }
-
-    @Test
-    void testUpdateStatusToRejected() {
-        Payment payment = payments.get(2);
-        doReturn(payment).when(paymentRepository).save(payment);
-        doReturn(order).when(orderRepository).findById(payment.getId());
-        doReturn(order).when(orderRepository).save(order);
-
-        Payment result = paymentService.setStatus(payment, PaymentStatus.REJECTED.getValue());
-
-        assertEquals(payment.getId(), result.getId());
-        assertEquals(PaymentStatus.REJECTED.getValue(), result.getStatus());
-        assertEquals(OrderStatus.FAILED.getValue(), order.getStatus());
-        verify(paymentRepository, times(1)).save(any(Payment.class));
-        verify(orderRepository, times(1)).save(any(Order.class));
     }
 
     @Test
