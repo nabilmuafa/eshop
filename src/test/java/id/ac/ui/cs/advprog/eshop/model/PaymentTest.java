@@ -8,8 +8,7 @@ import org.junit.jupiter.api.Test;
 import java.util.HashMap;
 import java.util.Map;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class PaymentTest {
     private Map<String,String> paymentData;
@@ -94,15 +93,19 @@ public class PaymentTest {
     @Test
     void testCreateAllValidArguments() {
         paymentData.put("voucherCode", "ESHOP80235gh021f");
-        Payment payment = new Payment(
-                "b94d0613-a74b-427e-8967-dc40abda13e7",
-                PaymentMethod.BY_VOUCHER.getValue(),
-                PaymentStatus.SUCCESS.getValue(),
-                paymentData
-        );
+        Payment payment = Payment.builder()
+                .id("b94d0613-a74b-427e-8967-dc40abda13e7")
+                .method(PaymentMethod.BY_VOUCHER.getValue())
+                .status(PaymentStatus.SUCCESS.getValue())
+                .paymentData(paymentData).build();
         assertEquals("b94d0613-a74b-427e-8967-dc40abda13e7", payment.getId());
         assertEquals(PaymentMethod.BY_VOUCHER.getValue(), payment.getMethod());
         assertEquals(PaymentStatus.SUCCESS.getValue(), payment.getStatus());
         assertEquals(paymentData, payment.getPaymentData());
+    }
+
+    @Test
+    void testToStringBuilderNotNull() {
+        assertNotNull(Payment.builder().toString());
     }
 }
