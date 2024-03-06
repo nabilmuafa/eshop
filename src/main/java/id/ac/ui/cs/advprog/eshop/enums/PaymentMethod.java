@@ -4,8 +4,8 @@ import lombok.Getter;
 
 @Getter
 public enum PaymentMethod {
-    BY_VOUCHER("by-voucher"),
-    BY_TRANSFER("by-transfer");
+    BY_VOUCHER("BY_VOUCHER"),
+    BY_TRANSFER("BY_VOUCHER");
 
     private final String value;
 
@@ -14,8 +14,8 @@ public enum PaymentMethod {
     }
 
     public static boolean contains(String param) {
-        for (PaymentStatus paymentStatus : PaymentStatus.values()) {
-            if (paymentStatus.name().equals(param)){
+        for (PaymentMethod paymentMethod : PaymentMethod.values()) {
+            if (paymentMethod.name().equals(param)){
                 return true;
             }
         }
