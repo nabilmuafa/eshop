@@ -1,13 +1,14 @@
 package id.ac.ui.cs.advprog.eshop.model;
 
+import lombok.Builder;
 import lombok.Setter;
 import lombok.Getter;
 
 import java.util.Arrays;
 import java.util.Map;
 
+@Builder
 @Getter
-@Setter
 public class Payment {
     private String id;
     private String method;
