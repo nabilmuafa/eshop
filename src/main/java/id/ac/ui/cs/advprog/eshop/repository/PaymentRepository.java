@@ -15,7 +15,7 @@ public class PaymentRepository {
             Payment p = paymentData.get(i);
             if (p.getId().equals(payment.getId())){
                 paymentData.remove(i);
-                paymentData.add(i, p);
+                paymentData.add(i, payment);
                 return payment;
             }
         }
