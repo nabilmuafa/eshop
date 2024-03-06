@@ -12,10 +12,11 @@ import java.util.Map;
 @Builder
 @Getter
 public class Payment {
-    private String id;
-    private String method;
-    private String status;
-    private Map<String, String> paymentData;
+    String id;
+    String method;
+    String status;
+    @Setter
+    Map<String, String> paymentData;
     public Payment(String id, String method, String status, Map<String, String> paymentData) {
         this.id = id;
         this.paymentData = paymentData;
@@ -44,4 +45,5 @@ public class Payment {
             throw new IllegalArgumentException();
         }
     }
+
 }
